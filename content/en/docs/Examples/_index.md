@@ -1,11 +1,11 @@
 
 ---
-title: "Theme"
-linkTitle: "Theme"
+title: "Examples"
+linkTitle: "Examples"
 weight: 3
 date: 2017-01-05
 description: >
-  Theming guidelines
+  See your project in action!
 ---
 
 {{% pageinfo %}}
