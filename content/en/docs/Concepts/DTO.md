@@ -3,28 +3,26 @@ title: "DTO - Data Transfer Objects"
 linkTitle: "DTOs (Data Transfer Objects)"
 weight: 35
 description: >
-  Learn about data transfer objects (aka ViewModels in Asp.net MVC).
+  Learn about Data Transfer Objects (Also known as ViewModels in Asp.NET MVC).
 ---
 
-## What are they?
+## What are DTOs?
 
-A data transfer object is a class that’s used for public display of another object in the app. DTO makes a class more presentable by hiding sensitive data.
+A data transfer object is a class that’s used for public display of another object in the app. A DTO makes a class more secure by hiding sensitive data.
 
-## Benefits of using them over raw entities?
+## Benefits of using DTOs over raw entities?
 
 A layer of DTOs isolates the domain model from the presentation, resulting in both loose coupling and optimized data transfer. In loose coupling, you can change one service without changing the other by reducing interdependencies. If DTOs are used, a change in the requirements that forces a move to a different amount of data doesn't have any impact on the service layer or even the domain.
 
-## How does Asp.Net core prevent overposting attacks by using field binding?
+## What is overposting?
 
-### - What is overposting?
+Overposting is a type of cyber attack that targets websites. More specifically, overposting targets controllers that expect an input from a user, but have other variables that are intentionally hidden from the user. For example, if a model has an “IsAdmin” variable that limits what a user can and cannot do, a hacker who knows this information can manually add an extra field to an input that would allow them to change the “IsAdmin” variable.
 
-Overposting is a type of cyber attack that targets websites. More specifically, overposting targets models that expect an input from a user, but have other variables that are intentionally hidden from the user. For example, if a model has a “IsAdmin” variable that limits what a user can and cannot do, a hacker who knows this information can manually add an extra field to an input that would allow them to change the “IsAdmin” variable.
+## How is overposting prevented?
 
-### - How is this prevented?
+Take a look at an example set of code by [Scott Hanselmen](https://www.hanselman.com/blog/aspnet-overpostingmass-assignment-model-binding-security):
 
-Take a look at an example set of code \(provided by [Scott Hanselmen](https://www.hanselman.com/blog/aspnet-overpostingmass-assignment-model-binding-security)\):
-
-```
+```csharp
 public class Person
 {
     public int ID { get; set; }
@@ -34,14 +32,14 @@ public class Person
 }
 ```
 
-```
+```csharp
 [HttpPost]
 [ValidateAntiForgeryToken]
 public async Task<IActionResult> Create(Person person)
 {
 ```
 
-```
+```csharp
  if (ModelState.IsValid)
     {
         _context.Add(person);
@@ -54,7 +52,7 @@ public async Task<IActionResult> Create(Person person)
 
 Here we see an entity and a corresponding action that accepts the entity as a parameter. Let's say that the controller only wants the “First” and “Last” variables to be gathered from an input. A hacker can very easily add another field to an input that allows them to edit either the “ID” or the “IsAdmin” field. Now, look at the same code again but this time it is using binding.
 
-```
+```csharp
 [HttpPost]
 [ValidateAntiForgeryToken]
 public async Task<IActionResult> Create([Bind("First,Last")] Person person)
@@ -69,17 +67,17 @@ public async Task<IActionResult> Create([Bind("First,Last")] Person person)
 }
 ```
 
-Now the action has bound the desired variables to itself. This means that it will only accept inputs that edit either the “First” or “Last” variables and will not take any inputs from anything else. This makes the other variables such as “IsAdmin” completely inaccessible to hackers.
+Now the action has bound the desired variables to "person". This means that the action will only accept inputs that create either the “First” or “Last” variables and will not take any inputs from anything else. This makes the other variables such as “IsAdmin” completely inaccessible to hackers.
 
 ## Notes from Microsoft
 
-Microsoft recognizes DTO’s as being superior to binding in terms of security. Take note of these resources for more information on DTO’s and their security in terms of overposting: [Create Data Transfer Objects](https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-5), [Microsoft Security note about Overposting](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/crud?view=aspnetcore-6.0#security-note-about-overposting)
+Microsoft recognizes DTOs as being superior to binding in terms of security. Take note of these resources for more information on DTO’s and their security in terms of overposting: [Create Data Transfer Objects](https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-5), [Microsoft Security note about Overposting](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/crud?view=aspnetcore-6.0#security-note-about-overposting).
 
 ## Examples
 
-Below is an example on a Class and a corresponding DTO that limits what parts of the class are visible \([Baeldung](https://www.baeldung.com/java-dto-pattern)\). For an example of regular binding see the “**How is this prevented?**” section of this document.
+Below is an example on a Class and a corresponding DTO that limits what parts of the class are visible. For an example, of regular binding see the “**How is overposting prevented?**” section of this document.
 
-```
+```csharp
 public class User {
  
     private String id;
@@ -101,7 +99,7 @@ public class User {
 }
 ```
 
-```
+```csharp
 public class UserDTO {
     private String name;
     private List<String> roles;
