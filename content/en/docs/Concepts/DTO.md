@@ -10,7 +10,7 @@ description: >
 
 A data transfer object is a class that’s used for public display of another object in the app. A DTO makes a class more secure by hiding sensitive data.
 
-## Benefits of using DTOs over raw entities?
+## Advantages of using DTOs over raw entities
 
 A layer of DTOs isolates the domain model from the presentation, resulting in both loose coupling and optimized data transfer. In loose coupling, you can change one service without changing the other by reducing interdependencies. If DTOs are used, a change in the requirements that forces a move to a different amount of data doesn't have any impact on the service layer or even the domain.
 
@@ -71,11 +71,11 @@ Now the action has bound the desired variables to "person". This means that the 
 
 ## Notes from Microsoft
 
-Microsoft recognizes DTOs as being superior to binding in terms of security. Take note of these resources for more information on DTO’s and their security in terms of overposting: [Create Data Transfer Objects](https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-5), [Microsoft Security note about Overposting](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/crud?view=aspnetcore-6.0#security-note-about-overposting).
+Microsoft recognizes DTOs as being superior to binding in terms of security. Take note of these resources for more information on DTOs and their security in terms of overposting: [Create Data Transfer Objects](https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-5), [Microsoft Security note about Overposting](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/crud?view=aspnetcore-6.0#security-note-about-overposting).
 
 ## Examples
 
-Below is an example on a Class and a corresponding DTO that limits what parts of the class are visible. For an example, of regular binding see the “**How is overposting prevented?**” section of this document.
+Below is an example on a class and a corresponding DTO that limits what parts of the class are visible. For an example, of regular binding see the “**How is overposting prevented?**” section of this document.
 
 ```csharp
 public class User {
