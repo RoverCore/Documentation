@@ -14,3 +14,6 @@ description: >
 
 ## Contributors
 Thank you to the contributors who help us in maintaining this project. Without you, it would be very difficult to do this!
+
+- Justin Costenbader
+- Aidan Leyden
