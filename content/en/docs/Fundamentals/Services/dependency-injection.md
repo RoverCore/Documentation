@@ -13,11 +13,13 @@ description: >
 
 ## What is Dependency Injection?
 
-Dependency Injection is the practice of passing dependencies to objects or other frameworks.
+Dependency Injection is the concept of passing dependencies to objects or other frameworks. 
+
+When a user wants to swap a class or dependency you can pass a different dependency in place of the old dependency.
 
 ## How does Dependency Injection work?
 
-Here is the main class where it functions
+Here is the main class where it functions.
 
 ```C#
 public class MyDependency
@@ -33,7 +35,7 @@ This separate class depends on the MyDependency to function.
 ```C#
 public class IndexModel : PageModel
 {
-    private readonly MyDependency _dependency = new MyDependency();
+    private readonly MyDependency _dependency;
 
     public void OnGet()
     {
@@ -101,7 +103,7 @@ For web applications, scoped lifetimes are created once per user request.
 
 ## Transient
 
-Transient lifetime services are created each time they are requested from the service container. This lifetime works best for lightweight, stateless services. Add transient services with AddTransient
+Transient lifetime services are created each time they are requested from the service container. This lifetime works best for lightweight, stateless services.
 
 In apps that process requests, transient services are disposed of at the end of the request.
 
@@ -109,7 +111,7 @@ In apps that process requests, transient services are disposed of at the end of 
 
 ## Singleton
 
-Singleton are a type of services that usually are created either the first time they are requested or when providing an implementation instance directly to the container.
+Singleton are a type of service that usually are created either the first time they are requested or when providing an implementation instance directly to the container.
 
 Every subsequent request of the service implementation from the dependency injection container uses the same instance. If the app requires singleton behavior, allow the service container to manage the service's lifetime. Don't implement the singleton design pattern and provide code to dispose of the singleton. Services should never be disposed of by code that resolved the service from the container. If a type of factory is registered as a singleton, the container disposes of the singleton automatically.
 
