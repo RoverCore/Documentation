@@ -14,11 +14,11 @@ The Model-View-Controller (MVC) pattern consists of three separate branches. The
 
 MVC has many very well documented benefits. It's strongly defined structures allow for good organization when dealing with large projects. MVC's structure also allows for asynchronous method invocation, meaning methods can be called and the rest of the program is able to be run while waiting for the called method to finish. This allows for faster loading applications. These methods can be run by using the keyword "await" to call a method that has been defined with the "async" property.
 
-Because the MVC format is so separated, people can work on different sections of the code at the same time with very little complications occurring. This separation also makes debugging more simple.
+Because the MVC format is separated into multiple sections, people can work on different sections of the code simultaneously without causing issues with the code. This separation can also make debugging simpler.
 
 ## Routing
 
-Routing in MVC usually follows a specific convention, but it can be done nearly any way by altering startup code. When making a project with MVC in Microsoft Visual Studio 2022 using ASP.NET Core 6, the default routing is the following:
+Routing in a MVC usually follows a specific convention, but it can be done nearly any way by altering the startup code. When making a project with a MVC in Microsoft Visual Studio 2022 using ASP.NET Core 6, the default routing is the following:
 
 ```csharp
 app.MapControllerRoute(
@@ -46,7 +46,7 @@ This code also shows how endpoints can be used to determine what routing should 
 
 ## Areas
 
-Areas are an organizational tool in MVC that allows programs to have much more effective routing and a set hierarchy to operate with. Areas are effectively a structure; thus, their content corresponds to a specific function or purpose in a program. For example, a program designed for  car dealership may have areas like "Rent," "Purchase," and "Sell," in order to reasonably separate the code. Areas are important in large programs in order to separate code in functional categories that may differ from simply their form (instead of grouping all controllers or all models, group their functions together).
+Areas are an organizational tool in MVC that allows programs to have much more effective routing and a set hierarchy to operate with. Areas are folders containing their own controllers, models, and views. This effectively makes area its own structure; thus, their content corresponds to a specific function or purpose in a program. For example, a program designed for a car dealership may have areas like "Rent," "Purchase," and "Sell," in order to reasonably separate the code. Areas are important in large programs in order to separate code in functional categories that may differ from simply their form (instead of grouping all controllers or all models, group their functions together).
 	
 In terms of routing, areas can simplify the routes necessary for certain pages and also group similar pages together. For example, examine the following code:
 
@@ -84,7 +84,7 @@ Action methods are defined in controllers to associate user actions with a progr
 | PartialViewResult |
 | HttpUnauthorizedResult |
 
-Default actions are defined in each controller. Action methods can also include parameters of any type if necessary. Here is an example of defining an Action Method:
+Action methods can also include parameters of any type if necessary. Here is an example of defining an action method:
 
 ```csharp
 public ActionResult Index()
@@ -93,11 +93,11 @@ public ActionResult Index()
 }
 ```
 
-Now, when /Index is referenced in the URL, the program will return the corresponding view.
+Now, when "/Index" is referenced in the URL, the program will return the corresponding view.
 
 ## Request Types
 
-Request Types identify the different possible actions that are invoked upon a program, often in order to retrieve and/or send data. Requests that aren't "GET" are defined by writing Http followed by the request type (as seen below) before an action method:
+Request Types identify the different possible actions that are invoked upon a program, often in order to retrieve and/or send data. Requests that aren't "GET" are defined by writing HTTP followed by the request type (as seen below) before an action method:
 
 ```csharp
 public class StudentController : Controller 
@@ -114,8 +114,6 @@ Examples of Request Types include:
 * HttpGet: Retrieve information identified by a request
 * HttpPost: Annotate, post messages, submitting a form, etc.
 * HttpPut: Send data to be stored
-* HttpHead: Same as HttpGet without a message-body
-* HttpOptions: Requests the communication options available without direct action
 * HttpDelete: Deletes resource
 
 ## References
