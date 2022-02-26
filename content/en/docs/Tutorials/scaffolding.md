@@ -18,7 +18,11 @@ In order to scaffold a controller, we first have to create the model for which w
 
 ### Creating a Model
 
-In order to create a model, right-click on the folder in which you would like to place the model (here, we are placing it in the Entities folder), then hover over Add, and click Class… A window will pop up; in the field at the very bottom, change the name of the model (we will replace the default value with Widget), and then click create. This will create an empty model, which we will define as follows:
+In order to create a model, right-click on the folder in which you would like to place the model (here, we are placing it in the Entities folder), then hover over *Add*, and click *Class…* A window will pop up; in the field at the very bottom, change the name of the model (we will replace the default value with Widget), and then click *Add*.
+
+![](https://i.imgur.com/vgnZ23V.gif)
+
+This will create an empty model, which we will define as follows:
 ```csharp
 public class Widget
 	{
@@ -34,20 +38,20 @@ public class Widget
 
 ## Scaffold a Controller
 
-Before scaffolding, we have to add Widget to our database; we will do this by adding ```public DbSet<Widget> Widget { get; set; }``` in our ApplicationDbContext.cs file (located in the Infrastructure folder under Persistence), so that it looks like this:
+Before scaffolding, we have to add *Widget* to our database; we will do this by adding ```public DbSet<Widget> Widget { get; set; }``` in our ApplicationDbContext.cs file (located in the Infrastructure folder under Persistence), so that it looks like this:
 ```csharp
 public DbSet<ConfigurationItem> ConfigurationItem { get; set; }
 public DbSet<Member> Member { get; set; }
 public DbSet<Template> Template { get; set; }
 public DbSet<Widget> Widget { get; set; }
 ```
-In order to scaffold a controller, we right-click on the folder in which we would like to place the controller (in our case the Controllers folder, located in the Presentation folder), hover over Add, and click Controller.
+In order to scaffold a controller, we right-click on the folder in which we would like to place the controller (in our case the Controllers folder, located in the Presentation folder), hover over Add, and click *Controller*.
 
-IMAGE
+![](https://i.imgur.com/leVBPRL.gif)
 
 In the window that appears, we select *MVC Controller with views, using Entity Framework*, and click Add. In the field for *Model class*, we select *Widget*, because that is the model we would like to scaffold the controller for, and in the field for *Data context* class, we select *ApplicationDbContext*, because that is the database we are using. We leave the default values for the other settings, and then type a name for our controller in the Controller field. We name ours *WidgetController*, then we click *Add* to scaffold the controller.
 
-IMAGE
+![](https://i.imgur.com/oPqj7WF.gif)
 
 ## Modifying a scaffolded CRUD Controller
 ### Modifying the Model
@@ -138,3 +142,5 @@ Now, we will implement ```SeedAsync()``` like this:
         return Task.CompletedTask;
     }
 ```
+### References
+[Data Seeding - EF Core | Microsoft Docs](https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding)
