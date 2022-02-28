@@ -93,7 +93,7 @@ Index.cshtml does not need to be edited because it does not have the object’s 
 
 {{< alert title="Definition" >}}Data seeding is populating the database with initial data.{{< /alert >}}
 We want to add some initial tags that can be selected for our Widget; in order to do that, we will create a class implementing ISeeder and call it WidgetTagSeed. 
-{{< alert title="Note" >}}Any class that implements ISeeder will be registered as a service with a scoped lifetime.  The service can use a dependency injection for any needed services.  The only method that needs to be implemented is Task SeedAsync().{{< /alert >}}
+{{< alert title="Note" >}}Any class that implements ISeeder will be registered as a service with a scoped lifetime. The service can use a dependency injection for any needed services. The only method that needs to be implemented is Task SeedAsync().{{< /alert >}}
 ### Adding a Dependency Injection
 WidgetTagSeed will have to have access to the database, so we add a dependency injection, like this:
 ```csharp
