@@ -114,7 +114,7 @@ public void CreateWidgetTag()
 ```
 Now, we will create a *UI* WidgetTag; but first, we need to check if there already exists a tag with the name “UI.” If there is, the function should stop running, because we do not want to create duplicates.
 ```csharp
-if (_context.WidgetTag.Where(x => x.Name == "UI") != null)
+if (_context.WidgetTag.Where(x => x.Name == "UI").FirstOrDefault() != null)
 {
 	return;
 }
