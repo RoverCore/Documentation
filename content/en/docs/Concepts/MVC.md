@@ -12,13 +12,13 @@ The Model-View-Controller (MVC) pattern consists of three separate branches. The
 
 ## Benefits of MVC
 
-MVC has many very well documented benefits. It's strongly defined structures allow for good organization when dealing with large projects. MVC's structure also allows for asynchronous method invocation, meaning methods can be called and the rest of the program is able to be run while waiting for the called method to finish. This allows for faster loading applications. These methods can be run by using the keyword "await" to call a method that has been defined with the "async" property.
+MVC has many well documented benefits. Its strongly defined structures allow for good organization when dealing with large projects. The MVC's structure also allows for asynchronous method invocation, meaning methods can be called and the rest of the program is able to be run while waiting for the called method to finish. This allows for faster loading applications. These methods can be run by using the keyword "await" to call a method that has been defined with the "async" property.
 
-Because the MVC format is separated into multiple sections, people can work on different sections of the code simultaneously without causing issues with the code. This separation can also make debugging simpler.
+Because the MVC format is separated into multiple sections, people can work on different components of the code simultaneously without causing issues. This separation can also make debugging simpler.
 
 ## Routing
 
-Routing in a MVC usually follows a specific convention, but it can be done nearly any way by altering the startup code. When making a project with a MVC in Microsoft Visual Studio 2022 using ASP.NET Core 6, the default routing is the following:
+Routing in a MVC usually follows a specific convention, but it can be done nearly any way by altering the startup code. When making a project with a MVC using ASP.NET Core 6, the default routing is the following:
 
 ```csharp
 app.MapControllerRoute(
@@ -46,7 +46,7 @@ This code also shows how endpoints can be used to determine what routing should 
 
 ## Areas
 
-Areas are an organizational tool in MVC that allows programs to have much more effective routing and a set hierarchy to operate with. Areas are folders containing their own controllers, models, and views. This effectively makes area its own structure; thus, their content corresponds to a specific function or purpose in a program. For example, a program designed for a car dealership may have areas like "Rent," "Purchase," and "Sell," in order to reasonably separate the code. Areas are important in large programs in order to separate code in functional categories that may differ from simply their form (instead of grouping all controllers or all models, group their functions together).
+Areas are an organizational structure in MVC that allows programs to have much more effective routing and a set hierarchy to operate with. Areas contain their own controllers, models, and views. This effectively makes area its own structure; thus, their content corresponds to a specific function or purpose in a program. For example, a program designed for a car dealership may have areas like "Rent," "Purchase," and "Sell," in order to reasonably separate the code. Areas are important in large programs in order to separate code in functional categories that may differ from simply their form (instead of grouping all controllers or all models, group their functions together).
 	
 In terms of routing, areas can simplify the routes necessary for certain pages and also group similar pages together. For example, examine the following code:
 
@@ -69,22 +69,20 @@ Now, all "Purchase" or "Sell" pages can be accessed directly from referencing th
 
 Action methods are defined in controllers to associate user actions with a program output. Actions are associated with an "ActionResult," which includes any of the following:
 
-| Action Methods |
-| -------- |
-| ViewResult |
-| EmptyResult |
-| ContentResult |
-| FileContentResult |
-| FilePathResult |
-| FileStreamResult |
-| JavaScriptResult |
-| JsonResult |
-| RedirectResult |
-| RedirectToRouteResult |
-| PartialViewResult |
-| HttpUnauthorizedResult |
+* ViewResult
+* EmptyResult
+* ContentResult
+* FileContentResult
+* FilePathResult
+* FileStreamResult
+* JavaScriptResult
+* JsonResult
+* RedirectResult
+* RedirectToRouteResult
+* PartialViewResult
+* HttpUnauthorizedResult
 
-Action methods can also include parameters of any type if necessary. Here is an example of defining an action method:
+Action methods can also include parameters of any type if necessary. Here is an example of defining an action method.
 
 ```csharp
 public ActionResult Index()
@@ -93,11 +91,11 @@ public ActionResult Index()
 }
 ```
 
-Now, when "/Index" is referenced in the URL, the program will return the corresponding view.
+Now, when `/Index` is referenced in the URL, the program will return the corresponding view.
 
 ## Request Types
 
-Request Types identify the different possible actions that are invoked upon a program, often in order to retrieve and/or send data. Requests that aren't "GET" are defined by writing HTTP followed by the request type (as seen below) before an action method:
+Request Types identify the different possible actions that are invoked upon a program, often in order to retrieve and/or send data. Requests that aren't `GET` are defined by writing HTTP followed by the request type (as seen below) before an action method:
 
 ```csharp
 public class StudentController : Controller 
