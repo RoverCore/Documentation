@@ -98,22 +98,19 @@ For web applications, scoped lifetimes are created once per user request.
 
 ```protected constructor(parent: ServiceScope | undefined);```
 
-[Service Scope Method Details](https://docs.microsoft.com/en-us/javascript/api/sp-core-library/servicescope?view=sp-typescript-latest#:~:text=ServiceScope%20provides%20a%20formalized%20way,dependencies%20in%20an%20extensible%20way.)
-[More Method Details Link](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions.addscoped?view=dotnet-plat-ext-6.0)
 
-## Transient
+## Transient lifetimes
 
 Transient lifetime services are created each time they are requested from the service container. This lifetime works best for lightweight, stateless services.
 
 In apps that process requests, transient services are disposed of at the end of the request.
 
-[Transient lifetime methods](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions.addtransient?view=dotnet-plat-ext-6.0)
 
 ## Singleton
 
-Singleton are a type of service that usually are created either the first time they are requested or when providing an implementation instance directly to the container.
+Singletons are a type of service that usually are created either the first time they are requested or when providing an implementation instance directly to the container.
 
-Every subsequent request of the service implementation from the dependency injection container uses the same instance. If the app requires singleton behavior, allow the service container to manage the service's lifetime. Don't implement the singleton design pattern and provide code to dispose of the singleton. Services should never be disposed of by code that resolved the service from the container. If a type of factory is registered as a singleton, the container disposes of the singleton automatically.
+Every subsequent request of the service implementation from the dependency injection container uses the same instance. If the app requires singleton behavior, allow the service container to manage the service's lifetime. Do not implement the singleton design pattern and provide code to dispose of the singleton. Services should never be disposed of by code that resolved the service from the container. If a type of factory is registered as a singleton, the container disposes of the singleton automatically.
 
 ## How do you make a Service?
 [Tutorial](https://csharpcorner-mindcrackerinc.netdna-ssl.com/article/create-windows-services-in-c-sharp/Images/image002.png)
@@ -173,3 +170,6 @@ var app = builder.Build();
 [ASP.NET Core Web Host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-6.0#scope-validation)
 [Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0)
 [Introduction to services and dependency injection](https://angular.io/guide/architecture-services)
+[Service Scope Method Details](https://docs.microsoft.com/en-us/javascript/api/sp-core-library/servicescope?view=sp-typescript-latest#:~:text=ServiceScope%20provides%20a%20formalized%20way,dependencies%20in%20an%20extensible%20way.)
+[More Method Details Link](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions.addscoped?view=dotnet-plat-ext-6.0)
+[Transient lifetime methods](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions.addtransient?view=dotnet-plat-ext-6.0)
