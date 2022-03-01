@@ -5,30 +5,31 @@ weight: 31
 description: >
   Lead in description for Identity
 ---
+## What is identity?
 Identity is a core feature available on ASP.NET which provides a lot of functionality to websites and is a basis for overall web development. The heart of identity is it that gives web pages the ability for users to create and save accounts. Essentially this is a built in membership system. Data related to user accounts such as usernames, emails, passwords, names and dates can be saved into a SQL server database or other forms such as an Azure Table Storage. Some of identities features include the ability to: 
--Create, read, update and delete user accounts
--Confirm a users account
--Authenticate and Authorize a users account
--Recover or reset an accounts password
--Enable two factor authentication with SMS or mobile application (ex. Steam Guard)
--Allow a web application to use external already established identities/accounts such as Microsoft, Facebook, Google, GitHub etc. 
+- Create, read, update and delete user accounts
+- Confirm a users account
+- Authenticate and Authorize a users account
+- Recover or reset an accounts password
+- Enable two factor authentication with SMS or mobile application (ex. Steam Guard)
+- Allow a web application to use external already established identities/accounts such as Microsoft, Facebook, Google, GitHub etc. 
 
 
 ## Identity
-In order to apply identity to a web application, one's project must contain the Microsoft.AspNetCore.Identity.EntityFrameworkCore package. This will allow for identity data and schema (outline/diagram/model/datatype) to access the SQL Server via the Entity Framework Core. You will be able to find the identity services added to the project in the ConfigureServices method of the Startup class. Thanks to dependency injection   these services will be usable throughout the entire application. In order to use Identity in the application UseIdentity must be called in the Configure method of Startup class. 	
+In order to apply identity to a web application, one's project must contain the `Microsoft.AspNetCore.Identity.EntityFrameworkCore` package. This will allow for identity data and schema (outline/diagram/model/datatype) to access the SQL Server via the Entity Framework Core. You will be able to find the identity services added to the project in the ConfigureServices method of the Startup class. Thanks to dependency injection these services will be usable throughout the entire application. In order to use Identity in the application, UseIdentity must be called in the Configure method of Startup class. 	
 
-The IdentityDbContext class is the base class for the Entity Framework database context used for identity. This class has the constructors IdentityDbContext() which initializes a new instance of the class as well as the IdentityDbContext(DbContextOptions) which initializes a new instance of IdentityDbContext. The properties included in this class include:
--RoleClaims- This will get or set the DbSet<TEntity> of role claims. 
--Roles- This will get or set the DbSet<TEntity> of roles.
--UserClaims- This will get or set the DbSet<TEntity> of User claims. 
--UserLogins- This will get or set the DbSet<TEntity> of User logins. 
--UserRoles- This will get or set the DbSet<TEntity> of User roles.
--Users- This will get or set the DbSet<TEntity> of Users. 
--UserTokens- This will get or set the DbSet<TEntity> of User tokens. 
--The only method in this class is OnModelCreating(ModelBuilder) which configures the schema needed for the identity framework. 
+The `IdentityDbContext` class is the base class for the Entity Framework database context used for identity. This class has the constructors ```C#IdentityDbContext()``` which initializes a new instance of the class as well as the `IdentityDbContext(DbContextOptions)` which initializes a new instance of IdentityDbContext. The properties included in this class include:
+- RoleClaims- This will get or set the DbSet<TEntity> of role claims. 
+- Roles- This will get or set the DbSet<TEntity> of roles.
+- UserClaims- This will get or set the DbSet<TEntity> of User claims. 
+- UserLogins- This will get or set the DbSet<TEntity> of User logins. 
+- UserRoles- This will get or set the DbSet<TEntity> of User roles.
+- Users- This will get or set the DbSet<TEntity> of Users. 
+- UserTokens- This will get or set the DbSet<TEntity> of User tokens. 
+- The only method in this class is OnModelCreating(ModelBuilder) which configures the schema needed for the identity framework. 
 
-**Where is Identity in RoverCore?**
-RoverCore uses ASP.NET 6 Identity. Some notable updates include simplified development, better performance, and productivity from the hot reload function. Using dependency injection, identity is useful in Rovercore due to the UserManager and SignInManager services. Both of those services are used in any controller if necessary. For Example 
+## **Where is Identity in RoverCore?**
+RoverCore uses ASP.NET 6's identity. Some notable updates include simplified development, better performance, and productivity from the hot reload function. Using dependency injection, identity is useful in Rovercore due to the UserManager and SignInManager services. Both of those services are used in any controller if necessary. For Example 
 ```C#
   private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
@@ -43,7 +44,7 @@ RoverCore uses ASP.NET 6 Identity. Some notable updates include simplified devel
 
 
 **Customization of ApplicationUser/ApplicationRole**
-An application role is a database principal that enables an application to run with its own permissions. You are able to customize the application role to enable access to specific data to only those users who go through the application in a specific way. Because application roles are a database principal, they can access other databases only through databases linked to a basic level or guest account. 
+An application role is a database principal (entity which requests SQL Server resources) that enables an application to run with its own permissions. You are able to customize the application role to enable access to specific data to only those users who go through the application in a specific way. Due to the fact that application roles are a database principal, they can access other databases only through databases linked to a basic level or guest account. 
 An application user is a built-in user account that is used to perform integration and system back-end service to support a particular feature. Customization is limited by an application user due them being built-in and unable to be updated.
 **userManager - What is it?**
 userManager is a service that is available through dependency injection. It’s a class that handles the user’s role,which determines what is independent for their account. userManager is  a class that controls the user by means of creating, deleting and updating the users. UserManager contains methods that find a user via username, email, and the User’s ID. userManager has functionality for adding/removing roles ie: Admin account versus a student account. userManager also includes generation of password hashes, validation of users and more additional privacy. 
@@ -62,8 +63,8 @@ public YourController(UserManager<ApplicationUser> userManager)
 
 
 
-**signInManager- What is it?**
-SignInManager is a service that is available through dependency injection. It’s a class that handles the user to sign in from the application. SignInManager authenticates the user which is simply logging the user in and out. Cookies are also dished out from SignInManager. Cookies are small blocks of  data used to help users access a website. SignInManager uses Authentication Cookies which helps the website identify what account the user is on, and authenticates the user so they are logged in. 
+**signInManager**
+SignInManager is a service that is available through dependency injection. It’s a class that handles the user to sign in from the application. SignInManager authenticates the user which is simply logging the user in and out. Cookies are also dished out from SignInManager. Cookies are small blocks of  data used to help users access a website. SignInManager uses authentication cookies which helps the website identify what account the user is on, and verifies the user so they are logged in. 
 Examples:
 ```C#
   Public class YourController : BasedController<YourController>
