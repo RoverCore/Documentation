@@ -165,7 +165,7 @@ var app = builder.Build();
 
 
 
-#### Helpful Resources
+#### Helpful Resources and References
 [ServiceScope class](https://docs.microsoft.com/en-us/javascript/api/sp-core-library/servicescope?view=sp-typescript-latest#:~:text=ServiceScope%20provides%20a%20formalized%20way,dependencies%20in%20an%20extensible%20way)
 [ASP.NET Core Web Host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-6.0#scope-validation)
 [Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0)
