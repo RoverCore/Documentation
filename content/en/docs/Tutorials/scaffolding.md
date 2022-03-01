@@ -87,7 +87,12 @@ In both Delete.cshtml and Details.cshtml, we add the following so that our page 
 </dd>
 ```
 Index.cshtml does not need to be edited because it does not have the object’s properties hardcoded.
-## Adding New Fields
+
+### Modifying the Controller
+
+## Using Multiselect Lists
+
+Let's say we want our user to be able to select several values for a particular attribute of a model, for example, several tags for a wdiget. We could achieve that with a Multiselect list; but first, let's create a model for a WidgetTag.
 
 ### Creating WidgetTag
 
@@ -118,7 +123,7 @@ public DbSet<WidgetTag> WidgetTags {get; set;}
 
 Once this is done, both `Widget` and `WidgetTag` are almost ready to be used.
 
-### Include WidgetTag in Widget
+### Including WidgetTag in Widget
 Next we need to include `WidgetTags` inside of a `Widget`. To do this, open the `Widget.cs` file, and include the following line:
 
 ```cs
@@ -136,7 +141,7 @@ Next we need to scaffold the controller and views. To do this, right click on th
 After this, continue with the scaffolding and you will be ready for the next section.
 
 
-## Update the Input Forms
+## Updating the Input Forms
 After setting up the models, we now need to provide a place for the user to input these `WidgetTags`. For this, we will use a `MultiSelectList`.
 The `Widget` model does not contain a `MultiSelectList` of `WidgetTags`, rather just a `List`. To do this, we can either create a ViewModel or use the ViewBag. In this tutorial we will use the ViewBag.
 
@@ -201,6 +206,7 @@ This code imports the Select2 libraries for both JavaScript and CSS. After this,
 
 > Sometimes, you are able to see the JavaScript in action because of the delay from when the user loads the page and when the code takes effect.
 
+## Using Seeding
 
 {{< alert title="Definition" >}}Data seeding is populating the database with initial data.{{< /alert >}}
 We want to add some initial tags that can be selected for our Widget; in order to do that, we will create a class implementing ISeeder and call it WidgetTagSeed. 
