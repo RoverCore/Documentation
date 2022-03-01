@@ -46,7 +46,8 @@ RoverCore uses ASP.NET 6's identity. Some notable updates include simplified dev
 **Customization of ApplicationUser/ApplicationRole**
 An application role is a database principal (entity which requests SQL Server resources) that enables an application to run with its own permissions. You are able to customize the application role to enable access to specific data to only those users who go through the application in a specific way. Due to the fact that application roles are a database principal, they can access other databases only through databases linked to a basic level or guest account. 
 An application user is a built-in user account that is used to perform integration and system back-end service to support a particular feature. Customization is limited by an application user due them being built-in and unable to be updated.
-**userManager - What is it?**
+
+## **userManager**
 userManager is a service that is available through dependency injection. It’s a class that handles the user’s role,which determines what is independent for their account. userManager is  a class that controls the user by means of creating, deleting and updating the users. UserManager contains methods that find a user via username, email, and the User’s ID. userManager has functionality for adding/removing roles ie: Admin account versus a student account. userManager also includes generation of password hashes, validation of users and more additional privacy. 
 Examples:
 ```C#
@@ -83,14 +84,14 @@ _userManager = signInManage;
 ###Common Questions when Using Identity
 
 
-**How can I get the currently logged in user?**
+####**How can I get the currently logged in user?**
 
 ```C#
   var user = await _userManager.GetUser(User);
   ```
 
 
-**How do I add a new user to a role?**
+####**How do I add a new user to a role?**
 
 ```C#
   // Add user to Admin role
@@ -99,7 +100,7 @@ await _userManager.AddToRoleAsync(user, "Admin");
   ```
 
 
-**How do I create a user?**
+####**How do I create a user?**
 Make sure you created a model class inside your models folders. A simple method that stores a new user in the database using a specified password :
 ```C#
   var user = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "bill", Email = "bill@microsoft.com" };
@@ -111,7 +112,7 @@ _logger.LogInformation("User created a new account with password.");
 ```
 
 
-**How do I change a user's password?**
+####**How do I change a user's password?**
 ```C#
 Public class ChangePasswordViewModel
 {
@@ -122,7 +123,7 @@ Public string NewPassword {get; set;}
 ```
 
 
-**How can I get a user by their username?**
+####**How can I get a user by their username?**
 ```C#
 string getUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToString();
 ```
@@ -131,18 +132,18 @@ string getUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name.ToS
 
 
 ## References
-* https://github.com/RoverCore/Documentation/issues/7
-* https://github.com/RoverCore/RoverCore
-* https://jakeydocs.readthedocs.io/en/latest/security/authentication/identity.html#:~:text=ASP.NET%20Core%20Identity%20is,Microsoft%20Account%2C%20Twitter%20and%20more.
-* https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/application-roles?view=sql-server-ver15#:~:text=An%20application%20role%20is%20a,connect%20through%20a%20particular%20application.
-* https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0
-* https://www.tektutorialshub.com/asp-net-core/asp-net-core-identity-tutorial/
-* https://www.youtube.com/watch?v=egITMrwMOPU
-* https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identitydbcontext?view=aspnetcore-6.0
-* https://youtu.be/OP_KDWlAgCQ
-* https://youtu.be/1OaVUy1pRXA
-* https://youtu.be/sPbDrqpme_w
-* https://youtu.be/r7VzoLhFLd0
-* https://youtu.be/9d8DXXc71RI
+* [Add Issue #7 Identity Documentation #12](https://github.com/RoverCore/Documentation/issues/7)
+* [RoverCore](https://github.com/RoverCore/RoverCore)
+* [Introduction to Identity](https://jakeydocs.readthedocs.io/en/latest/security/authentication/identity.html#:~:text=ASP.NET%20Core%20Identity%20is,Microsoft%20Account%2C%20Twitter%20and%20more.)
+* [Application Roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/application-roles?view=sql-server-ver15#:~:text=An%20application%20role%20is%20a,connect%20through%20a%20particular%20application.)
+* [Identity model customization in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0)
+* [ASP.NET Core Identity Tutorial](https://www.tektutorialshub.com/asp-net-core/asp-net-core-identity-tutorial/)
+* [ASP NET Core Identity tutorial from scratch](https://www.youtube.com/watch?v=egITMrwMOPU)
+* [IdentityDbContext Class](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identitydbcontext?view=aspnetcore-6.0)
+* [Get Current Logged In UserId of User in ASP.NET CORE Identity](https://youtu.be/OP_KDWlAgCQ)
+* [Manage user roles in asp net core identity](https://youtu.be/1OaVUy1pRXA)
+* [Register new user using asp net core identity](https://youtu.be/sPbDrqpme_w)
+* [Change password in asp net core  ](https://youtu.be/r7VzoLhFLd0)
+* [Implementing login functionality in asp net core](https://youtu.be/9d8DXXc71RI)
 * It was revealed to me in a dream
 
