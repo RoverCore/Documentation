@@ -87,9 +87,120 @@ In both Delete.cshtml and Details.cshtml, we add the following so that our page 
 </dd>
 ```
 Index.cshtml does not need to be edited because it does not have the object’s properties hardcoded.
-### Modifying the Controller
-## Using Multiselect Lists
-## Using Seeding
+## Adding New Fields
+
+### Creating WidgetTag
+
+To add a `WidgetTag` to the Widget model, first you need to create the `WidgetTag`. In the Entities folder under `RoverCore.Boilerplate.Domain`, create a class called `WidgetTag`.
+
+Inside of `WidgetTag`, the model should include the following:
+
+```cs
+[Key] public string Id {get; set;}
+public string Name {get; set;}
+public List<Widget> Widgets {get; set;}
+```
+### Adding WidgetTags to Widgets
+Next, in the Widget model, add this line:
+
+```cs
+public List<Tag> Tags {get; set;}
+```
+
+### Changing the ApplicationDbContext
+After you've created the `WidgetTag` model, you need to tell EF Core(Entity Framework Core) that it needs to store data relating to this model in the database.
+
+To do this, simply open the `ApplicationDbContext` file in Persistence under the `RoverCore.Boilerplate.Infrastructure project`. Then, include the following line in the main method:
+
+```cs
+public DbSet<WidgetTag> WidgetTags {get; set;}
+```
+
+Once this is done, both `Widget` and `WidgetTag` are almost ready to be used.
+
+### Include WidgetTag in Widget
+Next we need to include `WidgetTags` inside of a `Widget`. To do this, open the `Widget.cs` file, and include the following line:
+
+```cs
+[Required] public List<WidgetTag> WidgetTags { get; set; }
+```
+### Updating the Database
+The next step is to open the Package Manager Console, or PMC for short.
+In the PMC, we will add a migration called `Add-WidgetTag`. Then, we will update the database.
+
+
+> For more information on how to do this, we've written a very easy-to-understand guide on [How to Use the PMC](https://rovercore.github.io/Documentation/docs/fundamentals/data-persistence/working-with-the-database/pmc/).
+
+### Scaffolding the Controller
+Next we need to scaffold the controller and views. To do this, right click on the `Areas` folder and select *New Scaffolded Item...*. Choose *MVC Controller with views, using Entity Framework* and click *Add*. Select the `WidgetTag` class, and ensure that `ApplicationDbContext` is set.
+After this, continue with the scaffolding and you will be ready for the next section.
+
+
+## Update the input forms
+After setting up the models, we now need to provide a place for the user to input these `WidgetTags`. For this, we will use a `MultiSelectList`.
+The `Widget` model does not contain a `MultiSelectList` of `WidgetTags`, rather just a `List`. To do this, we can either create a ViewModel or use the ViewBag. In this tutorial we will use the ViewBag.
+
+In your `Create` action, include the following:
+
+```cs
+    public async Task<IActionResult> Create()
+    {
+        _breadcrumbs.StartAtAction("Dashboard", "Index", "Home", new { Area = "Dashboard" })
+            .ThenAction("Manage Widgets", "Index", "Widgets", new { Area = "" })
+            .Then("Create Widget");
+
+        var list = await _context.WidgetTags.ToListAsync();
+        ViewBag.List = new MultiSelectList(list, "Id", "Name");
+
+        return View();
+    }
+```
+
+Next, we need to add the `WidgetTags` to the binding fields. At the top of the controller, edit the `createBindingFields` line to 
+```cs
+private const string createBindingFields = "WidgetId,Name,Description,Available,Count,Price,WidgetTags";
+```
+
+After this, in the `Create.cshtml` file, add the following code:
+
+```cs
+<div class="form-group">
+    <label asp-for="WidgetTags" class="control-label"></label>
+    <select asp-for="WidgetTags" asp-items="ViewBag.List" class="form-control"></select>
+    <span asp-validation-for="WidgetTags" class="text-danger"></span>
+</div>
+```
+The code above create a `MultiSelectList` that binds to `WidgetTags` using `ViewBag.List` as its items. You can save the code and then rerun the project. The changes should apply and you will be able to apply `WidgetTags` to `Widgets`!
+
+
+## Updating the MultiSelectList to Select2
+
+One of the ways that you can improve your website is by using CSS libraries. For input fields, we will use Select2.
+
+In the `Create.cshtml` file, include the code below.
+
+```cs
+@section Styles {
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+     <script type="text/javascript">
+     $(document).ready(function () {            
+             $("#WidgetTagInputField").select2({
+             placeholder: "Select Item",
+             allowClear: true
+             });
+         });
+     </script>
+}
+```
+This code imports the Select2 libraries for both JavaScript and CSS. After this, using JavaScript, we tell the document to make the select list a Select 2 list. This is because JavaScript is ran after the page is loaded.
+
+> Sometimes, you are able to see the JavaScript in action because of the delay from when the user loads the page and when the code takes effect.
+
 
 {{< alert title="Definition" >}}Data seeding is populating the database with initial data.{{< /alert >}}
 We want to add some initial tags that can be selected for our Widget; in order to do that, we will create a class implementing ISeeder and call it WidgetTagSeed. 
@@ -144,3 +255,6 @@ Now, we will implement ```SeedAsync()``` like this:
 ```
 ### References
 [Data Seeding - EF Core | Microsoft Docs](https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding)
+[Select 2](https://select2.org/getting-started/basic-usage)
+[Create select 2 dropdownlist in asp.net c#](https://c-sharplibrary.blogspot.com/2017/08/create-select-2-dropdownlist-in-aspnet-c.html)
+[Scholarships](https://github.com/eahs/scholarships)
