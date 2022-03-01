@@ -136,7 +136,7 @@ Next we need to scaffold the controller and views. To do this, right click on th
 After this, continue with the scaffolding and you will be ready for the next section.
 
 
-## Update the input forms
+## Update the Input Forms
 After setting up the models, we now need to provide a place for the user to input these `WidgetTags`. For this, we will use a `MultiSelectList`.
 The `Widget` model does not contain a `MultiSelectList` of `WidgetTags`, rather just a `List`. To do this, we can either create a ViewModel or use the ViewBag. In this tutorial we will use the ViewBag.
 
