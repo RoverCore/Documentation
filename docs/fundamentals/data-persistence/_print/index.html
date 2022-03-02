@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <link rel=canonical type=text/html href=../../../../Documentation/docs/fundamentals/data-persistence/>
 <link rel=alternate type=application/rss+xml href=../../../../Documentation/docs/fundamentals/data-persistence/index.xml>
 <meta name=robots content="noindex, nofollow">
@@ -16,8 +16,7 @@
 <link rel=icon type=image/png href=../../../../favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=../../../../favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=../../../../favicons/android-192x192.png sizes=192x192>
-<title>Data Persistence | RoverCore Docs</title>
-<meta name=description content="RoverCore utilizes Entity Framework for data persistence.  Entity Framework Core is a modern object-database mapper for .NET.
+<title>Data Persistence | RoverCore Docs</title><meta name=description content="RoverCore utilizes Entity Framework for data persistence.  Entity Framework Core is a modern object-database mapper for .NET.
 ">
 <meta property="og:title" content="Data Persistence">
 <meta property="og:description" content="RoverCore utilizes Entity Framework for data persistence.  Entity Framework Core is a modern object-database mapper for .NET.
@@ -36,9 +35,7 @@
 <link rel=stylesheet href=../../../../css/prism.css>
 <link rel=stylesheet href=../../../../css/tabler.min.css><link rel=stylesheet href=../../../../css/tabler-flags.min.css><link rel=stylesheet href=../../../../css/tabler-payments.min.css><link rel=stylesheet href=../../../../css/tabler-vendors.min.css><link rel=stylesheet href=../../../../css/demo.min.css>
 <script type=text/javascript src=../../../../js/tabler.js></script>
-<style type=text/css>@import 'https://fonts.googleapis.com/css2?family=Poppins&display=swap';.breadcrumb{margin-bottom:1rem!important}.feedback--title{margin-top:4rem}:root{--tblr-font-sans-serif:"Poppins",-apple-system,BlinkMacSystemFont,San Francisco,Segoe UI,Roboto,Helvetica Neue,sans-serif}.lead{font-size:1.1rem}</style>
-</head>
-<body class=td-section>
+<style type=text/css>@import 'https://fonts.googleapis.com/css2?family=Poppins&display=swap';.breadcrumb{margin-bottom:1rem!important}.feedback--title{margin-top:4rem}:root{--tblr-font-sans-serif:"Poppins",-apple-system,BlinkMacSystemFont,San Francisco,Segoe UI,Roboto,Helvetica Neue,sans-serif}.lead{font-size:1.1rem}</style></head><body class=td-section>
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=../../../../>
@@ -48,20 +45,12 @@
 <ul class="navbar-nav mt-2 mt-lg-0">
 <li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=../../../../about/><span>About</span></a>
-</li>
-<li class="nav-item mr-4 mb-2 mb-lg-0">
+</li><li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class="nav-link active" href=../../../../docs/><span class=active>Documentation</span></a>
-</li>
-<li class="nav-item mr-4 mb-2 mb-lg-0">
+</li><li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=../../../../community/><span>Community</span></a>
-</li>
-</ul>
-</div>
-<div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off>
-</div>
-</nav>
-</header>
-<div class="container-fluid td-outer">
+</li></ul></div><div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; Search this site…" aria-label="Search this site…" autocomplete=off>
+</div></nav></header><div class="container-fluid td-outer">
 <div class=td-main>
 <div class="row flex-xl-nowrap">
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
@@ -72,114 +61,35 @@ This is the multi-page printable view of this section.
 <a href=# onclick="return print(),!1">Click here to print</a>.
 </p><p>
 <a href=../../../../docs/fundamentals/data-persistence/>Return to the regular view of this page</a>.
-</p>
-</div>
-<h1 class=title>Data Persistence</h1>
-<div class=lead>RoverCore utilizes Entity Framework for data persistence. Entity Framework Core is a modern object-database mapper for .NET.</div>
-<ul>
-<li>1: <a href=#pg-36caf8df76984c5c9a2c0499566cb8c7>Creating Entities</a></li>
-<li>2: <a href=#pg-294994bcab3163346d8a6e803c8a9963>Model Attributes</a></li>
-<li>3: <a href=#pg-c7df133a2c5b1b08fd0b9ed13aa1407f>Seeding Data</a></li>
-<li>4: <a href=#pg-69d585aa57968a751ef60482306cf91f>Working with the Database</a></li>
-<ul>
-<li>4.1: <a href=#pg-e6dde345a9431324cbfe8ce8e84e92f3>AppSettings</a></li>
-<li>4.2: <a href=#pg-865d994b4131a525a67ced068c79e765>CLI - Command Line</a></li>
-<li>4.3: <a href=#pg-153afac9afac4a2d9797e60615ab3e84>PMC - Package Manager Console</a></li>
-</ul>
-</ul>
-<div class=content>
+</p></div><h1 class=title>Data Persistence</h1><div class=lead>RoverCore utilizes Entity Framework for data persistence. Entity Framework Core is a modern object-database mapper for .NET.</div><ul>
+<li>1: <a href=#pg-36caf8df76984c5c9a2c0499566cb8c7>Creating Entities</a></li><li>2: <a href=#pg-294994bcab3163346d8a6e803c8a9963>Model Attributes</a></li><li>3: <a href=#pg-c7df133a2c5b1b08fd0b9ed13aa1407f>Seeding Data</a></li><li>4: <a href=#pg-69d585aa57968a751ef60482306cf91f>Working with the Database</a></li><ul>
+<li>4.1: <a href=#pg-e6dde345a9431324cbfe8ce8e84e92f3>AppSettings</a></li><li>4.2: <a href=#pg-865d994b4131a525a67ced068c79e765>CLI - Command Line</a></li><li>4.3: <a href=#pg-153afac9afac4a2d9797e60615ab3e84>PMC - Package Manager Console</a></li></ul></ul><div class=content>
 <div class="pageinfo pageinfo-primary">
-<p>Entity Framework is a very large topic. In this section, we will be going over the basics of EF Core. For more information, please visit <a href=https://docs.microsoft.com/en-us/ef/>Entity Framework Documentation</a>.</p>
-</div>
-<h2 id=what-is-entity-framework-ef-core>What is Entity Framework (EF Core)?</h2>
-<h2 id=why-use-it>Why use it?</h2>
-<h2 id=how-do-i-use-it>How do I use it?</h2>
-</div>
-</div>
-<div class=td-content>
-<h1 id=pg-36caf8df76984c5c9a2c0499566cb8c7>1 - Creating Entities</h1>
-<div class=lead>Learn more about how to create your own data models in RoverCore.</div>
-<div class="pageinfo pageinfo-primary">
-<p>Models are a core part of ASP.NET. It is part of the structure, MVC, meaning Model View Controller.</p>
-</div>
-<h2 id=what-is-a-model>What is a model?</h2>
-<h2 id=how-do-i-create-a-model>How do I create a model?</h2>
-<h2 id=what-next>What next?</h2>
-<p>Now that you have successfully created a model, you can head on to the next section, <a href=../../../../docs/fundamentals/entity-framework/model-attributes>Model Attributes</a>.</p>
-</div>
-<div class=td-content style=page-break-before:always>
-<h1 id=pg-294994bcab3163346d8a6e803c8a9963>2 - Model Attributes</h1>
-<div class=lead>Learn more about decorating models with attributes to secure your data.</div>
-<div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page that shows you how to use this template site.</p>
-</div>
-</div>
-<div class=td-content style=page-break-before:always>
-<h1 id=pg-c7df133a2c5b1b08fd0b9ed13aa1407f>3 - Seeding Data</h1>
-<div class=lead>Learn how to setup your database with preset data for you to use.</div>
-<h2 id=what-is-seeding-data>What is seeding data?</h2>
-<h2 id=why-would-i-seed-data>Why would I seed data?</h2>
-<h2 id=how-do-i-seed-data>How do I seed data?</h2>
-</div>
-<div class=td-content style=page-break-before:always>
-<h1 id=pg-69d585aa57968a751ef60482306cf91f>4 - Working with the Database</h1>
-<div class=lead>Learn about migrations and why they are important.</div>
-<h2 id=what-is-a-migration>What is a migration?</h2>
-<h2 id=why-use-it>Why use it?</h2>
-<h2 id=how-do-i-use-it>How do I use it?</h2>
-</div>
-<div class=td-content>
-<h1 id=pg-e6dde345a9431324cbfe8ce8e84e92f3>4.1 - AppSettings</h1>
-<div class=lead>Learn about AppSettings.json and how to configure the database.</div>
-<h2 id=what-is-appsettings>What is AppSettings?</h2>
-<h2 id=why-use-it>Why use it?</h2>
-<h2 id=how-do-i-use-it>How do I use it?</h2>
-</div>
-<div class=td-content style=page-break-before:always>
-<h1 id=pg-865d994b4131a525a67ced068c79e765>4.2 - CLI - Command Line</h1>
-<div class=lead>Learn how to run your application using the command line.</div>
-<h2 id=what-is-the-command-line>What is the command line?</h2>
-<h2 id=why-use-it>Why use it?</h2>
-<h2 id=how-do-i-use-it>How do I use it?</h2>
-</div>
-<div class=td-content style=page-break-before:always>
-<h1 id=pg-153afac9afac4a2d9797e60615ab3e84>4.3 - PMC - Package Manager Console</h1>
-<div class=lead>Learn about Nuget Packages and how to use the PMC.</div>
-<h2 id=what-is-a-nuget-package>What is a Nuget Package?</h2>
-<h2 id=what-is-the-package-manager-console>What is the Package Manager Console?</h2>
-<h2 id=why-use-it>Why use it?</h2>
-<h2 id=how-do-i-use-it>How do I use it?</h2>
-</div>
-</main>
-</div>
-</div>
-<footer class="bg-dark py-5 row d-print-none">
+<p>Entity Framework is a very large topic. In this section, we will be going over the basics of EF Core. For more information, please visit <a href=https://docs.microsoft.com/en-us/ef/>Entity Framework Documentation</a>.</p></div><h2 id=what-is-entity-framework-ef-core>What is Entity Framework (EF Core)?</h2><h2 id=why-use-it>Why use it?</h2><h2 id=how-do-i-use-it>How do I use it?</h2></div></div><div class=td-content>
+<h1 id=pg-36caf8df76984c5c9a2c0499566cb8c7>1 - Creating Entities</h1><div class=lead>Learn more about how to create your own data models in RoverCore.</div><div class="pageinfo pageinfo-primary">
+<p>Models are a core part of ASP.NET. It is part of the structure, MVC, meaning Model View Controller.</p></div><h2 id=what-is-a-model>What is a model?</h2><h2 id=how-do-i-create-a-model>How do I create a model?</h2><h2 id=what-next>What next?</h2><p>Now that you have successfully created a model, you can head on to the next section, <a href=../../../../docs/fundamentals/entity-framework/model-attributes>Model Attributes</a>.</p></div><div class=td-content style=page-break-before:always>
+<h1 id=pg-294994bcab3163346d8a6e803c8a9963>2 - Model Attributes</h1><div class=lead>Learn more about decorating models with attributes to secure your data.</div><div class="pageinfo pageinfo-primary">
+<p>This is a placeholder page that shows you how to use this template site.</p></div></div><div class=td-content style=page-break-before:always>
+<h1 id=pg-c7df133a2c5b1b08fd0b9ed13aa1407f>3 - Seeding Data</h1><div class=lead>Learn how to setup your database with preset data for you to use.</div><h2 id=what-is-seeding-data>What is seeding data?</h2><h2 id=why-would-i-seed-data>Why would I seed data?</h2><h2 id=how-do-i-seed-data>How do I seed data?</h2></div><div class=td-content style=page-break-before:always>
+<h1 id=pg-69d585aa57968a751ef60482306cf91f>4 - Working with the Database</h1><div class=lead>Learn about migrations and why they are important.</div><h2 id=what-is-a-migration>What is a migration?</h2><h2 id=why-use-it>Why use it?</h2><h2 id=how-do-i-use-it>How do I use it?</h2></div><div class=td-content>
+<h1 id=pg-e6dde345a9431324cbfe8ce8e84e92f3>4.1 - AppSettings</h1><div class=lead>Learn about AppSettings.json and how to configure the database.</div><h2 id=what-is-appsettings>What is AppSettings?</h2><h2 id=why-use-it>Why use it?</h2><h2 id=how-do-i-use-it>How do I use it?</h2></div><div class=td-content style=page-break-before:always>
+<h1 id=pg-865d994b4131a525a67ced068c79e765>4.2 - CLI - Command Line</h1><div class=lead>Learn how to run your application using the command line.</div><h2 id=what-is-the-command-line>What is the command line?</h2><h2 id=why-use-it>Why use it?</h2><h2 id=how-do-i-use-it>How do I use it?</h2></div><div class=td-content style=page-break-before:always>
+<h1 id=pg-153afac9afac4a2d9797e60615ab3e84>4.3 - PMC - Package Manager Console</h1><div class=lead>Learn about Nuget Packages and how to use the PMC.</div><h2 id=what-is-a-nuget-package>What is a Nuget Package?</h2><h2 id=what-is-the-package-manager-console>What is the Package Manager Console?</h2><h2 id=why-use-it>Why use it?</h2><h2 id=how-do-i-use-it>How do I use it?</h2></div></main></div></div><footer class="bg-dark py-5 row d-print-none">
 <div class="container-fluid mx-sm-5">
 <div class=row>
 <div class="col-6 col-sm-4 text-xs-center order-sm-2">
-</div>
-<div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+</div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
 <ul class="list-inline mb-0">
 <li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub>
 <a class=text-white target=_blank rel=noopener href=https://github.com/rovercore/rovercore aria-label=GitHub>
 <i class="fab fa-github"></i>
 </a>
-</li>
-</ul>
-</div>
-<div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+</li></ul></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2">
 <small class=text-white>&copy; 2022 The RoverCore Authors All Rights Reserved</small>
 <small class=ml-1><a href=https://policies.google.com/privacy target=_blank rel=noopener>Privacy Policy</a></small>
-<p class=mt-2><a href=../../../../about/>About RoverCore</a></p>
-</div>
-</div>
-</div>
-</footer>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
+<p class=mt-2><a href=../../../../about/>About RoverCore</a></p></div></div></div></footer></div><script src=https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin=anonymous></script>
 <script src=../../../../js/tabpane-persist.js></script>
-<script src=../../../../js/main.min.ad61136f51b666ce839fd4156e5725ded757ac991931c59853b0be91c18511b4.js integrity="sha256-rWETb1G2Zs6Dn9QVblcl3tdXrJkZMcWYU7C+kcGFEbQ=" crossorigin=anonymous></script>
+<script src=../../../../js/main.min.84971874ebbfafae0fabd58618d7766b4f3962240b1499cc3da2f410c57645f7.js integrity="sha256-hJcYdOu/r64Pq9WGGNd2a085YiQLFJnMPaL0EMV2Rfc=" crossorigin=anonymous></script>
 <script src=../../../../js/prism.js></script>
-</body>
-</html>
+</body></html>
