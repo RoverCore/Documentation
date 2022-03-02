@@ -28,7 +28,7 @@ The `IdentityDbContext` class is the base class for the Entity Framework databas
 - UserTokens- This will get or set the DbSet<TEntity> of User tokens. 
 - The only method in this class is OnModelCreating(ModelBuilder) which configures the schema needed for the identity framework. 
 
-## **Where is Identity in RoverCore?**
+## Where is Identity in RoverCore?
 RoverCore uses ASP.NET 6’s identity. Some notable updates include simplified development, better performance, and productivity from the hot reload function. Using dependency injection, identity is useful in RoverCore due to the UserManager and SignInManager services. Both of those services are used in any controller if necessary. For Example
 ```C#
   private readonly UserManager<ApplicationUser> _userManager;
@@ -46,7 +46,7 @@ RoverCore uses ASP.NET 6’s identity. Some notable updates include simplified d
 **Customization of ApplicationUser/ApplicationRole**
 An application role is an entity that enables an application to run with its own permissions. You are able to customize the application role to enable access to specific data to only those users who go through the application in a specific way. Because application roles are entities, they can access other databases only through databases linked to a basic level or guest account.
 An application user is a built-in user account that is used to perform integration and system back-end service to support a particular feature. Customization is limited by an application user due them being built-in and unable to be updated.
-## **What is a  userManager?**
+**What is a  userManager?**
 A class that can handle a user’s role and account on a website is called UserManager.The background of UserManager is that it’s a class that controls the user by means of creating, deleting and updating the users. There are various methods of UserManager you can use that can find a user via username, email, and the User’s ID. The functionality of UserManager includes adding/removing roles ie: Admin account versus a student account. Lastly also includes generation of password hashes, validation of users and more additional privacy. 
 Examples:
 ```C#
@@ -80,17 +80,17 @@ _userManager = signInManage;
 
 
 
-###Common Questions when Using Identity
+### Common Questions when Using Identity
 
 
-####**How can I get the currently logged in user?**
+#### How can I get the currently logged in user?
 
 ```C#
   var user = await _userManager.GetUser(User);
   ```
 
 
-####**How do I add a new user to a role?**
+#### How do I add a new user to a role?
 
 ```C#
   // Add user to Admin role
@@ -99,7 +99,7 @@ await _userManager.AddToRoleAsync(user, "Admin");
   ```
 
 
-####**How do I create a user?**
+#### How do I create a user?
 Make sure you created a model class inside your models folders. A simple method that stores a new user in the database using a specified password :
 ```C#
   var user = new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "bill", Email = "bill@microsoft.com" };
