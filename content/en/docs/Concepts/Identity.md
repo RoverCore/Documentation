@@ -29,7 +29,7 @@ The `IdentityDbContext` class is the base class for the Entity Framework databas
 - The only method in this class is OnModelCreating(ModelBuilder) which configures the schema needed for the identity framework. 
 
 ## **Where is Identity in RoverCore?**
-RoverCore uses ASP.NET 6's identity. Some notable updates include simplified development, better performance, and productivity from the hot reload function. Using dependency injection, identity is useful in Rovercore due to the UserManager and SignInManager services. Both of those services are used in any controller if necessary. For Example 
+RoverCore uses ASP.NET 6’s identity. Some notable updates include simplified development, better performance, and productivity from the hot reload function. Using dependency injection, identity is useful in RoverCore due to the UserManager and SignInManager services. Both of those services are used in any controller if necessary. For Example
 ```C#
   private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
@@ -44,11 +44,10 @@ RoverCore uses ASP.NET 6's identity. Some notable updates include simplified dev
 
 
 **Customization of ApplicationUser/ApplicationRole**
-An application role is a database principal (entity which requests SQL Server resources) that enables an application to run with its own permissions. You are able to customize the application role to enable access to specific data to only those users who go through the application in a specific way. Due to the fact that application roles are a database principal, they can access other databases only through databases linked to a basic level or guest account. 
+An application role is an entity that enables an application to run with its own permissions. You are able to customize the application role to enable access to specific data to only those users who go through the application in a specific way. Because application roles are entities, they can access other databases only through databases linked to a basic level or guest account.
 An application user is a built-in user account that is used to perform integration and system back-end service to support a particular feature. Customization is limited by an application user due them being built-in and unable to be updated.
-
-## **userManager**
-userManager is a service that is available through dependency injection. It’s a class that handles the user’s role,which determines what is independent for their account. userManager is  a class that controls the user by means of creating, deleting and updating the users. UserManager contains methods that find a user via username, email, and the User’s ID. userManager has functionality for adding/removing roles ie: Admin account versus a student account. userManager also includes generation of password hashes, validation of users and more additional privacy. 
+## **What is a  userManager?**
+A class that can handle a user’s role and account on a website is called UserManager.The background of UserManager is that it’s a class that controls the user by means of creating, deleting and updating the users. There are various methods of UserManager you can use that can find a user via username, email, and the User’s ID. The functionality of UserManager includes adding/removing roles ie: Admin account versus a student account. Lastly also includes generation of password hashes, validation of users and more additional privacy. 
 Examples:
 ```C#
   Public class YourController : BasedController<YourController>
@@ -64,9 +63,9 @@ public YourController(UserManager<ApplicationUser> userManager)
 
 
 
-**signInManager**
-SignInManager is a service that is available through dependency injection. It’s a class that handles the user to sign in from the application. SignInManager authenticates the user which is simply logging the user in and out. Cookies are also dished out from SignInManager. Cookies are small blocks of  data used to help users access a website. SignInManager uses authentication cookies which helps the website identify what account the user is on, and verifies the user so they are logged in. 
-Examples:
+**What is a signInManager?**
+A service that is available through dependency injection is known as SignInManager. It’s a class that handles the user to sign in from the application. The service authenticates the user which is simply logging the user in and out. Cookies are also dished out from SignInManager. Cookies are small blocks of  data used to help users access a website. Authentication cookies help the website identify what account the user is on. Here are some examples.
+
 ```C#
   Public class YourController : BasedController<YourController>
 {
