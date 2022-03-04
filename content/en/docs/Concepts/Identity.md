@@ -43,10 +43,10 @@ RoverCore uses ASP.NET 6’s identity. Some notable updates include simplified d
 
 
 
-**Customization of ApplicationUser/ApplicationRole**
+## Customization of ApplicationUser/ApplicationRole
 An application role is an entity that enables an application to run with its own permissions. You are able to customize the application role to enable access to specific data to only those users who go through the application in a specific way. Because application roles are entities, they can access other databases only through databases linked to a basic level or guest account.
 An application user is a built-in user account that is used to perform integration and system back-end service to support a particular feature. Customization is limited by an application user due them being built-in and unable to be updated.
-**What is a  userManager?**
+**What is a userManager?**
 A class that can handle a user’s role and account on a website is called UserManager.The background of UserManager is that it’s a class that controls the user by means of creating, deleting and updating the users. There are various methods of UserManager you can use that can find a user via username, email, and the User’s ID. The functionality of UserManager includes adding/removing roles ie: Admin account versus a student account. Lastly also includes generation of password hashes, validation of users and more additional privacy. 
 Examples:
 ```C#
