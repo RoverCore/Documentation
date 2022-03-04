@@ -88,8 +88,6 @@ In both Delete.cshtml and Details.cshtml, we add the following so that our page 
 ```
 Index.cshtml does not need to be edited because it does not have the object’s properties hardcoded.
 
-### Modifying the Controller
-
 ## Using Multiselect Lists
 
 Let's say we want our user to be able to select several values for a particular attribute of a model, for example, several tags for a wdiget. We could achieve that with a Multiselect list; but first, let's create a model for a WidgetTag.
