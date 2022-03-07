@@ -46,7 +46,7 @@ public class IndexModel : PageModel
 
 Dependency injection plays its place when you decide to replace the dependency and test it with another dependency. 
 
-Replacing the ```_dependency.WriteMessage``` with a different method, to test a more optimal way of going about with the code is dependency Injection. 
+Replacing the ```_dependency.WriteMessage``` with a different method, to test a more optimal way of going about with the code is dependency injection. 
 
 Dependency injection also allows you to prepare all the required classes to function a code. 
 
@@ -56,7 +56,7 @@ These swappable classes use things called services.
 
 ## What are Services?
 
-The swappable classes that dependency injection uses are called services. Services are well-defined classes that serve a specific purpose. Any service registered with Dependency Injection can usually be resolved in Program.cs and app.Services.
+The swappable classes that dependency injection uses are called services. Services are well-defined classes that serve a specific purpose. Any service registered with dependency injection can usually be resolved in Program.cs and app.Services.
 
 Services also offer service scopes.
 
