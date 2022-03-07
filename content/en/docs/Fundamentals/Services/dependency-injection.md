@@ -11,13 +11,13 @@ description: >
 
 
 
-## What is Dependency Injection?
+## What Is Dependency Injection?
 
 Dependency Injection is the concept of passing dependencies to objects or other frameworks. 
 
 When a user wants to swap a class or dependency you can pass a different dependency in place of the old dependency.
 
-## How does Dependency Injection work?
+## How Does Dependency Injection Work?
 
 Here is the main class where it functions.
 
@@ -54,7 +54,7 @@ With a simple connection to the script you need you can change the WriteMessage 
 
 These swappable classes use things called services.
 
-## What are Services?
+## What Are Services?
 
 The swappable classes that dependency injection uses are called services. Services are well-defined classes that serve a specific purpose. Any service registered with dependency injection can usually be resolved in Program.cs and app.Services.
 
@@ -72,7 +72,7 @@ builder.Services.AddScoped<IMyDependency, MyDependency>();
 
 var app = builder.Build();
 ```
-## What are Service lifetimes?
+## What Are Service lifetimes?
 
 There are three types of service lifetimes:
 1. Scoped
@@ -99,7 +99,7 @@ For web applications, scoped lifetimes are created once per user request.
 ```protected constructor(parent: ServiceScope | undefined);```
 
 
-## Transient lifetimes
+## Transient Lifetimes
 
 Transient lifetime services are created each time they are requested from the service container. This lifetime works best for lightweight, stateless services.
 
