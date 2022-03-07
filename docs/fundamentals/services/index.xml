@@ -1,2 +1,117 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>RoverCore Docs â€“ Services</title><link>/Documentation/docs/fundamentals/services/</link><description>Recent content in Services on RoverCore Docs</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Thu, 05 Jan 2017 00:00:00 +0000</lastBuildDate><atom:link href="/Documentation/docs/fundamentals/services/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: DI - Dependency Injection</title><link>/Documentation/docs/fundamentals/services/dependency-injection/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>/Documentation/docs/fundamentals/services/dependency-injection/</guid><description>
-&lt;h2 id="what-is-dependency-injection">What is Dependency Injection?&lt;/h2></description></item><item><title>Docs: Service Registration</title><link>/Documentation/docs/fundamentals/services/service-registration/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>/Documentation/docs/fundamentals/services/service-registration/</guid><description/></item></channel></rss>
+&lt;h2 id="what-is-dependency-injection">What Is Dependency Injection?&lt;/h2>
+&lt;p>Dependency Injection is the concept of passing dependencies to objects or other frameworks.&lt;/p>
+&lt;p>When a user wants to swap a class or dependency you can pass a different dependency in place of the old dependency.&lt;/p>
+&lt;h2 id="how-does-dependency-injection-work">How Does Dependency Injection Work?&lt;/h2>
+&lt;p>Here is the main class where it functions.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-C#" data-lang="C#">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">MyDependency&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">WriteMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#204a87;font-weight:bold">string&lt;/span> &lt;span style="color:#000">message&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">Console&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">WriteLine&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">$&amp;#34;MyDependency.WriteMessage called. Message: {message}&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This separate class depends on the MyDependency to function.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-C#" data-lang="C#">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">class&lt;/span> &lt;span style="color:#000">IndexModel&lt;/span> &lt;span style="color:#000;font-weight:bold">:&lt;/span> &lt;span style="color:#000">PageModel&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">private&lt;/span> &lt;span style="color:#204a87;font-weight:bold">readonly&lt;/span> &lt;span style="color:#000">MyDependency&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">_d&lt;/span>&lt;span style="color:#000">ependency&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">public&lt;/span> &lt;span style="color:#204a87;font-weight:bold">void&lt;/span> &lt;span style="color:#000">OnGet&lt;/span>&lt;span style="color:#000;font-weight:bold">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#0000cf;font-weight:bold">_d&lt;/span>&lt;span style="color:#000">ependency&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">WriteMessage&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;IndexModel.OnGet&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dependency injection plays its place when you decide to replace the dependency and test it with another dependency.&lt;/p>
+&lt;p>Replacing the &lt;code>_dependency.WriteMessage&lt;/code> with a different method, to test a more optimal way of going about with the code is dependency injection.&lt;/p>
+&lt;p>Dependency injection also allows you to prepare all the required classes to function a code.&lt;/p>
+&lt;p>With a simple connection to the script you need you can change the WriteMessage method above.&lt;/p>
+&lt;p>These swappable classes use things called services.&lt;/p>
+&lt;h2 id="what-are-services">What Are Services?&lt;/h2>
+&lt;p>The swappable classes that dependency injection uses are called services. Services are well-defined classes that serve a specific purpose. Any service registered with dependency injection can usually be resolved in Program.cs and app.Services.&lt;/p>
+&lt;p>Services also offer service scopes.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-C#" data-lang="C#">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">using&lt;/span> &lt;span style="color:#000">DependencyInjectionSample.Interfaces&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">using&lt;/span> &lt;span style="color:#000">DependencyInjectionSample.Services&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">builder&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">WebApplication&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">CreateBuilder&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">args&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Services&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">AddRazorPages&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Services&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">AddScoped&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;lt;&lt;/span>&lt;span style="color:#000">IMyDependency&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">MyDependency&lt;/span>&lt;span style="color:#000;font-weight:bold">&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">app&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Build&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="what-are-service-lifetimes">What Are Service lifetimes?&lt;/h2>
+&lt;p>There are three types of service lifetimes:&lt;/p>
+&lt;ol>
+&lt;li>Scoped&lt;/li>
+&lt;li>Transient&lt;/li>
+&lt;li>Singleton&lt;/li>
+&lt;/ol>
+&lt;h2 id="scoped">Scoped&lt;/h2>
+&lt;p>Service scope is a type of method that allows two different page managers to share the same dependencies.&lt;/p>
+&lt;p>Page managers allow you to manage and monitor functions of a page&lt;/p>
+&lt;p>Usually, this is not possible, but service scopes allow this by creating an overhanging method.&lt;/p>
+&lt;p>Another unique aspect of service scopes is that it allows for a ServiceKey to provide a default implementation.&lt;/p>
+&lt;p>The ServiceKey is a lookup key that is used when calling &lt;code>ServiceScope.consume()&lt;/code> to fetch a dependency.&lt;/p>
+&lt;p>For web applications, scoped lifetimes are created once per user request.&lt;/p>
+&lt;h3 id="service-scope-constructors">Service Scope Constructors&lt;/h3>
+&lt;p>&lt;strong>Below constructs a new scope for a service scope class.&lt;/strong>&lt;/p>
+&lt;p>&lt;code>protected constructor(parent: ServiceScope | undefined);&lt;/code>&lt;/p>
+&lt;h2 id="transient-lifetimes">Transient Lifetimes&lt;/h2>
+&lt;p>Transient lifetime services are created each time they are requested from the service container. This lifetime works best for lightweight, stateless services.&lt;/p>
+&lt;p>In apps that process requests, transient services are disposed of at the end of the request.&lt;/p>
+&lt;h2 id="singleton">Singleton&lt;/h2>
+&lt;p>Singletons are a type of service that usually are created either the first time they are requested or when providing an implementation instance directly to the container.&lt;/p>
+&lt;p>Every subsequent request of the service implementation from the dependency injection container uses the same instance. If the app requires singleton behavior, allow the service container to manage the service&amp;rsquo;s lifetime. Do not implement the singleton design pattern and provide code to dispose of the singleton. Services should never be disposed of by code that resolved the service from the container. If a type of factory is registered as a singleton, the container disposes of the singleton automatically.&lt;/p>
+&lt;h2 id="how-do-you-make-a-service">How do you make a Service?&lt;/h2>
+&lt;p>&lt;a href="https://csharpcorner-mindcrackerinc.netdna-ssl.com/article/create-windows-services-in-c-sharp/Images/image002.png">Tutorial&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;em>In Visual Studios, go to File &amp;gt; New &amp;gt; Project and select “Window Service”&lt;/em>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Right-click screen &amp;gt; Add installer&lt;/em>
+t&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Right-click screen &amp;gt; View code (F7)&lt;/em>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Start programming your service&lt;/em>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Right-click project in Solution &amp;gt; Rebuild&lt;/em>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>Run code in command prompt:&lt;/em>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;em>cd C:\Windows\Microsoft.NET\Framework\v4.0.30319&lt;/em>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="common-rules-for-creating-services">Common rules for creating services:&lt;/h3>
+&lt;p>Avoid stateful, static classes, and members. Avoid creating global state by designing apps to use singleton services instead.&lt;/p>
+&lt;p>A state is a behavorial pattern that is stored.&lt;/p>
+&lt;p>When multiple methods are required to share state, people tend to use global variables/objects to store such state.&lt;/p>
+&lt;p>Avoid direct instantiation of dependent classes within services. Direct instantiation couples the code to a particular implementation.&lt;/p>
+&lt;p>Make services small, well-factored, and easily testable.&lt;/p>
+&lt;h2 id="how-are-services-registered">How are services registered?&lt;/h2>
+&lt;p>The ‘Add’ extension methods are used to register all of the services required by a framework feature.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-C#" data-lang="C#">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">using&lt;/span> &lt;span style="color:#000">Microsoft.Extensions.DependencyInjection.ConfigSample.Options&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">builder&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">WebApplication&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">CreateBuilder&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">args&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Services&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">AddConfig&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Configuration&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">AddMyDependencyGroup&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Services&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">AddRazorPages&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">var&lt;/span> &lt;span style="color:#000">app&lt;/span> &lt;span style="color:#000;font-weight:bold">=&lt;/span> &lt;span style="color:#000">builder&lt;/span>&lt;span style="color:#000;font-weight:bold">.&lt;/span>&lt;span style="color:#000">Build&lt;/span>&lt;span style="color:#000;font-weight:bold">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="helpful-resources-and-references">Helpful Resources and References&lt;/h4>
+&lt;p>&lt;a href="https://docs.microsoft.com/en-us/javascript/api/sp-core-library/servicescope?view=sp-typescript-latest#:~:text=ServiceScope%20provides%20a%20formalized%20way,dependencies%20in%20an%20extensible%20way">ServiceScope class&lt;/a>
+&lt;a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-6.0#scope-validation">ASP.NET Core Web Host&lt;/a>
+&lt;a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0">Dependency injection in ASP.NET Core&lt;/a>
+&lt;a href="https://angular.io/guide/architecture-services">Introduction to services and dependency injection&lt;/a>
+&lt;a href="https://docs.microsoft.com/en-us/javascript/api/sp-core-library/servicescope?view=sp-typescript-latest#:~:text=ServiceScope%20provides%20a%20formalized%20way,dependencies%20in%20an%20extensible%20way.">Service Scope Method Details&lt;/a>
+&lt;a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions.addscoped?view=dotnet-plat-ext-6.0">More Method Details Link&lt;/a>
+&lt;a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions.addtransient?view=dotnet-plat-ext-6.0">Transient lifetime methods&lt;/a>&lt;/p></description></item><item><title>Docs: Service Registration</title><link>/Documentation/docs/fundamentals/services/service-registration/</link><pubDate>Thu, 05 Jan 2017 00:00:00 +0000</pubDate><guid>/Documentation/docs/fundamentals/services/service-registration/</guid><description/></item></channel></rss>

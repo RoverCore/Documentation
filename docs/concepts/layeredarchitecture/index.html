@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.93.1">
+<meta name=generator content="Hugo 0.93.2">
 <meta name=robots content="index, follow">
 <link rel="shortcut icon" href=../../../favicons/favicon.ico>
 <link rel=apple-touch-icon href=../../../favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -21,11 +21,11 @@
 ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/Documentation/docs/concepts/layeredarchitecture/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-03-04T14:42:38-05:00"><meta property="og:site_name" content="RoverCore Docs">
+<meta property="article:modified_time" content="2022-03-07T17:33:40-05:00"><meta property="og:site_name" content="RoverCore Docs">
 <meta itemprop=name content="Layered Architecture">
 <meta itemprop=description content="Layered Architectures break a codebase up into areas according to responsibilities or concerns.
 ">
-<meta itemprop=dateModified content="2022-03-04T14:42:38-05:00">
+<meta itemprop=dateModified content="2022-03-07T17:33:40-05:00">
 <meta itemprop=wordCount content="881">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Layered Architecture">
@@ -266,7 +266,7 @@
 <li>Database</li><li>Cache</li><li>Logging</li><li>Email</li><li>Templates</li><li>Configuration</li></ul><p>In many of the above architectures you would typically create services that provide a way to manipulate the data entities stored in the database in the Infrastructure layer. The business logic itself would typically be put into a fourth project (typically named Application) and these data manipulation services would be injected into any Application layer service that might need it through dependency injection.</p><p>For this project, you can decide what you want to do. The beginning approach would be to simply add any supporting services your application needs inside the Infrastructure project. The services you create in Infrastructure can then be used in any controller in the web project that you want.</p><h3 id=core-layer>Core Layer</h3><p>The core layer includes projects (like Domain) that have no dependencies on the other application layers. The core holds entities, services, and interfaces. These interfaces include abstractions for operations that will be performed using Infrastructure, such as data access, file system access, network calls, etc. Sometimes services or interfaces defined at this layer will need to work with non-entity types that have no dependencies on UI or Infrastructure. These can be defined as simple Data Transfer Objects (DTOs).</p><p>Application Core types</p><ul>
 <li>Entities (business model classes that are persisted)</li><li>Aggregates (groups of entities)</li><li>Interfaces</li><li>Domain Services</li><li>Specifications</li><li>Custom Exceptions and Guard Clauses</li><li>Domain Events and Handlers</li></ul><h2 id=references>References</h2><blockquote>
 <p>The preceding text contains excerpts that are creative-commons licensed from Microsoft. The full article can be found <a href=https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures>here</a>.</p></blockquote><h2 id=more-reading>More Reading</h2><p><a href=https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures>Common Web Application Architectures</a></p><div class="text-muted mt-5 pt-3 border-top">
-Last modified March 4, 2022: <a href=https://github.com/rovercore/documentation/commit/28dd13520ffd8407537affbb7c499bab8a25456a>Merge pull request #20 from RoverCore/vk-crud-scaffolding (28dd135)</a>
+Last modified March 7, 2022: <a href=https://github.com/rovercore/documentation/commit/8687825c66b15c868f3f10d31a45b27c0b02f8cb>Merge pull request #11 from FarazLiaquat/main (8687825)</a>
 </div></div></main></div></div><footer class="bg-dark py-5 row d-print-none">
 <div class="container-fluid mx-sm-5">
 <div class=row>
