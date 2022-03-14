@@ -257,6 +257,51 @@ Now, we will implement ```SeedAsync()``` like this:
         return Task.CompletedTask;
     }
 ```
+### The Entire Seeder Code
+```csharp
+using Microsoft.EntityFrameworkCore;
+using RoverDemo.Domain.Entities;
+using RoverDemo.Domain.Entities.Widgets;
+using RoverDemo.Infrastructure.Common.Seeder.Services;
+using RoverDemo.Infrastructure.Persistence.DbContexts;
+
+namespace RoverDemo.Infrastructure.Identity.Seeding;
+
+public class WidgetTagSeed : ISeeder
+{
+    private readonly ApplicationDbContext _context;
+
+    public WidgetTagSeed(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public void CreateWidgetTag()
+    {
+        if (_context.WidgetTag.Where(x => x.Name == "UI").FirstOrDefault() != null)
+        {
+            return;
+        }
+
+        var tag = new WidgetTag
+        {
+            Id = Guid.NewGuid().ToString(),
+            Name = "UI",
+            Widgets = new List<Widget>()
+        };
+
+        _context.Add(tag);
+        _context.SaveChangesAsync();
+    }
+
+    public Task SeedAsync()
+    {
+        CreateWidgetTag();
+
+        return Task.CompletedTask;
+    }
+}
+```
 ### References
 [Data Seeding - EF Core | Microsoft Docs](https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding)
 [Select 2](https://select2.org/getting-started/basic-usage)
