@@ -19,40 +19,56 @@ When a user wants to swap a class or dependency you can pass a different depende
 
 ## How Does Dependency Injection Work?
 
-Here is the main class where it functions.
+Here is the main class where it functions. Below is a service where it will authenticate requests.
 
 ```C#
-public class MyDependency
+using ClassPort.Domain.DTOs.Authentication;
+using ClassPort.Domain.Entities.Identity;
+
+namespace ClassPort.Infrastructure.Authentication.Services
 {
-    public void WriteMessage(string message)
+    public interface IUserService
     {
-        Console.WriteLine($"MyDependency.WriteMessage called. Message: {message}");
+        Task<AuthenticateResponse?> Authenticate(AuthenticateRequest model);
+        Task<ApplicationUser?> GetById(string id);
     }
 }
 ```
-This separate class depends on the MyDependency to function.
+This separate class depends on ```namespace ClassPort.Infrastructure.Authentication.Services``` to function and authenticate the app.
 
 ```C#
-public class IndexModel : PageModel
-{
-    private readonly MyDependency _dependency;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-    public void OnGet()
-    {
-        _dependency.WriteMessage("IndexModel.OnGet");
-    }
+namespace ClassPort.Infrastructure.Authorization;
+
+public static class Startup
+{
+	/// <summary>
+	///     Add authorization services required for authentication
+	/// </summary>
+	public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+	{
+
+	}
+
+	public static void Configure(IApplicationBuilder app, IConfiguration configuration)
+	{
+		app.UseAuthorization();
+	}
 }
 ```
 
 Dependency injection plays its place when you decide to replace the dependency and test it with another dependency. 
 
-Replacing the ```_dependency.WriteMessage``` with a different method, to test a more optimal way of going about with the code is dependency injection. 
+Replacing the ```app.UseAuthorization``` with a different method, to test a more optimal way of going about with the code is dependency injection. 
 
 Dependency injection also allows you to prepare all the required classes to function a code. 
 
-With a simple connection to the script you need you can change the WriteMessage method above.
+With a simple connection to the script you need you can change the function of the public static void Configure method above.
 
-These swappable classes use things called services.
+These swappable methods connected to classes use things called services.
 
 ## What Are Services?
 
@@ -61,16 +77,43 @@ The swappable classes that dependency injection uses are called services. Servic
 Services also offer service scopes.
 
 ```C#
-using DependencyInjectionSample.Interfaces;
-using DependencyInjectionSample.Services;
+using FluentEmail.MailKitSmtp;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using ClassPort.Domain.Entities.Settings;
+using ClassPort.Infrastructure.Common.Email.Services;
+using ClassPort.Infrastructure.Common.Templates.Models;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace ClassPort.Infrastructure.Common.Email;
 
-builder.Services.AddRazorPages();
+public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+	{
+		var settings = configuration.GetSection("Settings").Get<ApplicationSettings>();
 
-builder.Services.AddScoped<IMyDependency, MyDependency>();
+		var provider = new VirtualFileProvider();
 
-var app = builder.Build();
+		services.AddSingleton<VirtualFileProvider>(provider);
+		services.AddFluentEmail(settings.Email.DefaultSenderAddress, settings.Email.DefaultSenderName)
+			.AddLiquidRenderer(config =>
+			{
+				config.FileProvider = provider;
+			})
+			.AddMailKitSender(new SmtpClientOptions
+			{
+				Server = settings.Email.Server,
+				Port = settings.Email.Port,
+				User = settings.Email.User,
+				Password = settings.Email.Password,
+				UseSsl = settings.Email.UseSsl,
+				RequiresAuthentication = settings.Email.RequiresAuthentication,
+				PreferredEncoding = settings.Email.PreferredEncoding,
+				UsePickupDirectory = settings.Email.UsePickupDirectory,
+				MailPickupDirectory = settings.Email.MailPickupDirectory
+			});
+
+        services.AddTransient<IEmailSender, EmailSender>();
+	}
 ```
 ## What Are Service lifetimes?
 
@@ -81,24 +124,13 @@ There are three types of service lifetimes:
 
 ## Scoped
 
-Service scope is a type of method that allows two different page managers to share the same dependencies.
+For web applications, a scoped lifetime indicates that services are created once per client request (connection). Register scoped services with AddScoped.
 
-Page managers allow you to manage and monitor functions of a page
+In apps that process requests, scoped services are disposed at the end of the request.
 
-Usually, this is not possible, but service scopes allow this by creating an overhanging method.
+When using Entity Framework Core, the AddDbContext extension method registers DbContext types with a scoped lifetime by default.
 
-Another unique aspect of service scopes is that it allows for a ServiceKey to provide a default implementation.
-
-The ServiceKey is a lookup key that is used when calling ```ServiceScope.consume()``` to fetch a dependency.
-
-For web applications, scoped lifetimes are created once per user request.
-
-### Service Scope Constructors
-**Below constructs a new scope for a service scope class.**
-
-```protected constructor(parent: ServiceScope | undefined);```
-
-
+By default, in the development environment, resolving a service from another service with a longer lifetime throws an exception.
 ## Transient Lifetimes
 
 Transient lifetime services are created each time they are requested from the service container. This lifetime works best for lightweight, stateless services.
@@ -115,20 +147,15 @@ Every subsequent request of the service implementation from the dependency injec
 ## How do you make a Service?
 [Tutorial](https://csharpcorner-mindcrackerinc.netdna-ssl.com/article/create-windows-services-in-c-sharp/Images/image002.png)
 
-1. *In Visual Studios,  go to File > New > Project and select “Window Service”*
+1. *In Visual Studios,  first create a project*
 
-2. *Right-click screen > Add installer*
+2. *Create a folder(Maybe call it Services)*
 t
-3. *Right-click screen > View code (F7)*
+3. *Right-click Services > Create a class*
 
 4. *Start programming your service*
 
-
-5. *Right-click project in Solution > Rebuild*
-
-6. *Run code in command prompt:*
-
-7. *cd C:\Windows\Microsoft.NET\Framework\v4.0.30319*
+5. *Now you can freely use your service within your code, As long as you reference it*
 
 ### Common rules for creating services:
 
@@ -146,18 +173,32 @@ Make services small, well-factored, and easily testable.
 
 The ‘Add’ extension methods are used to register all of the services required by a framework feature.
 
+Below it shows the .AddSingleton method. Here it registers the services and configures it to the program.
 ```C#
-using Microsoft.Extensions.DependencyInjection.ConfigSample.Options;
+using ConsoleDI.IEnumerableExample;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace ConsoleDI.Example;
 
-builder.Services
-    .AddConfig(builder.Configuration)
-    .AddMyDependencyGroup();
+class Program
+{
+    static Task Main(string[] args)
+    {
+        using IHost host = CreateHostBuilder(args).Build();
 
-builder.Services.AddRazorPages();
+        _ = host.Services.GetService<ExampleService>();
 
-var app = builder.Build();
+        return host.RunAsync();
+    }
+
+    static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureServices((_, services) =>
+                services.AddSingleton<IMessageWriter, ConsoleMessageWriter>()
+                        .AddSingleton<IMessageWriter, LoggingMessageWriter>()
+                        .AddSingleton<ExampleService>());
+}
 ```
 
 
@@ -169,7 +210,5 @@ var app = builder.Build();
 [ServiceScope class](https://docs.microsoft.com/en-us/javascript/api/sp-core-library/servicescope?view=sp-typescript-latest#:~:text=ServiceScope%20provides%20a%20formalized%20way,dependencies%20in%20an%20extensible%20way)
 [ASP.NET Core Web Host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/web-host?view=aspnetcore-6.0#scope-validation)
 [Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0)
-[Introduction to services and dependency injection](https://angular.io/guide/architecture-services)
-[Service Scope Method Details](https://docs.microsoft.com/en-us/javascript/api/sp-core-library/servicescope?view=sp-typescript-latest#:~:text=ServiceScope%20provides%20a%20formalized%20way,dependencies%20in%20an%20extensible%20way.)
-[More Method Details Link](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions.addscoped?view=dotnet-plat-ext-6.0)
+[Service lifetime details](https://docs.microsoft.com/en-us/dotnet/core/extensions/dependency-injection#service-lifetimes)
 [Transient lifetime methods](https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions.addtransient?view=dotnet-plat-ext-6.0)
